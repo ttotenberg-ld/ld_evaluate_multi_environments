@@ -4,9 +4,11 @@ It's a way to evaluate flags across multiple LaunchDarkly environments. Used to 
 Note: you may want to set targeting to various rollouts across your different environments, so that you don't end up with everything looking samey across every environment, like in my 'after' picture.
 
 Go from this:
+
 ![before](media/before.png)
 
 To this:
+
 ![after](media/after.png)
 
 # How can I use it?
