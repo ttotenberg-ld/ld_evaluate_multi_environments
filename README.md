@@ -1,6 +1,8 @@
 # What is this?
 It's a way to evaluate flags across multiple LaunchDarkly environments. Used to populate demo instances. It will evaluate all flags in the environments of your choice every 30 seconds.
 
+Note: you may want to set targeting to various rollouts across your different environments, so that you don't end up with everything looking samey across every environment, like in my 'after' picture.
+
 Go from this:
 ![before](media/before.png)
 
