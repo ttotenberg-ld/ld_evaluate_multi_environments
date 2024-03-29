@@ -1,10 +1,15 @@
 # What is this?
-It's a handy way to visualize percentage rollouts in LaunchDarkly. Just a big grid showing a black or white square, depending on whether the context is being served `false` or `true`. It renders in the console, and updates when you update the flag.
+It's a way to evaluate flags across multiple LaunchDarkly environments. Used to populate demo instances. It will evaluate all flags in the environments of your choice every 30 seconds.
 
-Note: In my terminal, the black and white squares counterintuitively are reversed. (Maybe something to do with dark theme?) Update lines 36 - 37 if you'd like to switch them for yourself! 
+Go from this:
+![before](media/before.png)
+
+To this:
+![after](media/after.png)
 
 # How can I use it?
 1. `pip install requirements.txt`
 2. Rename `.env.example` to `.env`
-3. Replace the environment variables in `.env` with your values. Point it to any LaunchDarkly boolean flag you like!
-4. `python -i main.py`
+3. Replace the environment variables in `.env` with your values.
+4. `python main.py`
+5. Press `ctrl/cmd + c` to stop the process
