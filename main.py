@@ -53,7 +53,7 @@ def evaluate_flags(environments):
         ldclient.get().flush()
         time.sleep(1)
         ldclient.get().close()
-        time.sleep(30)
+        time.sleep(1)
 
         
 if __name__ == '__main__':
