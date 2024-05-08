@@ -58,4 +58,8 @@ def evaluate_flags(environments):
         
 if __name__ == '__main__':
     while True:
-        evaluate_flags(SDK_LIST)
+        try:
+            evaluate_flags(SDK_LIST)
+        except Exception as e:
+            print(f'Error: {e}')
+            break
