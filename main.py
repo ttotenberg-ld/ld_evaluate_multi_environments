@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 import json
 import ldclient
 from ldclient.config import Config
+from ldclient.versioned_data_kind import FEATURES
 import os
 import time
 from utils.create_context import *
@@ -13,48 +14,50 @@ Get environment variables
 load_dotenv()
 
 SDK_LIST = json.loads(os.environ.get('SDK_LIST'))
-API_KEY = os.environ.get('API_KEY')
-PROJECT_KEY = os.environ.get('PROJECT_KEY')
-
-'''
-Define API call to get list of flags
-'''
-flag_list_url = f'/flags/{PROJECT_KEY}'
-
-def get_flag_list():
-    response = api_call("GET", flag_list_url, API_KEY, {}).json()
-    response_list = response['items']
-    number_of_flags = len(response_list)
-    flag_list = []
-
-    for i in range(number_of_flags):
-        flag_list.append(response['items'][i]['key'])
-    
-    return flag_list
 
 '''
 Evaluate all flags in an environment
 '''
-def evaluate_all_flags(flag_list, context):
-    for flag in flag_list:
-        flag_value = ldclient.get().variation(flag, context, False)
+def evaluate_all_flags(context):
+    # Method to get all flags from the feature store. Taken from https://github.com/launchdarkly/python-server-sdk/blob/d152455b89cb70164d8487a1cc0b47f92017a5c4/ldclient/client.py#L549
+    feature_store = ldclient.__client._store.all(FEATURES, lambda x: x)
+    for key in feature_store.keys():
+        result = ldclient.get().variation(key, context, False)
+
+'''
+It's just fun :)
+'''
+def show_banner():
+    print()
+    print("        ██       ")
+    print("          ██     ")
+    print("      ████████   ")
+    print("         ███████ ")
+    print("██ LAUNCHDARKLY █")
+    print("         ███████ ")
+    print("      ████████   ")
+    print("          ██     ")
+    print("        ██       ")
+    print()
 
 '''
 Main loop to evaluate flags across multiple environments
 '''
 def evaluate_flags(environments):
-    flags = get_flag_list()
     context = create_multi_context()
+    show_banner()
     for env in environments:
         print(f'Evaluating environment: sdk-****-{env[-4:]}')
         ldclient.set_config(Config(env))
-        evaluate_all_flags(flags, context)
+        if not ldclient.get().is_initialized():
+            print("*** SDK failed to initialize. Please check your internet connection and SDK credential for any typo.")
+            exit()
+        evaluate_all_flags(context)
         time.sleep(1)
         ldclient.get().flush()
         time.sleep(1)
         ldclient.get().close()
         time.sleep(1)
-
         
 if __name__ == '__main__':
     while True:
