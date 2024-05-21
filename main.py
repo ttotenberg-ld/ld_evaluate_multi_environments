@@ -45,7 +45,6 @@ Main loop to evaluate flags across multiple environments
 '''
 def evaluate_flags(environments):
     context = create_multi_context()
-    show_banner()
     for env in environments:
         print(f'Evaluating environment: sdk-****-{env[-4:]}')
         ldclient.set_config(Config(env))
@@ -60,6 +59,7 @@ def evaluate_flags(environments):
         time.sleep(1)
         
 if __name__ == '__main__':
+    show_banner()
     while True:
         try:
             evaluate_flags(SDK_LIST)
