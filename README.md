@@ -14,6 +14,6 @@ To this:
 # How can I use it?
 1. `pip install requirements.txt`
 2. Rename `.env.example` to `.env`
-3. Replace the environment variables in `.env` with your values.
+3. Replace the environment variables in `.env` with the server-side SDK keys you want to use. Make the list as big as you want.
 4. `python main.py`
-5. Press `ctrl/cmd + c` to stop the process
+5. Press `ctrl + c` to stop the process
