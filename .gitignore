@@ -5,3 +5,15 @@ __pycache__
 venv
 poetry.lock
 pyproject.toml
+
+*.tfstate*
+*.tfvars
+.terraform
+*.lock.hcl
+
+demoflageval/*
+!demoflageval/lambda_demoflageval.zip
+!demoflageval/main.py
+!demoflageval/requirements.txt
+!demoflageval/utils*
+
