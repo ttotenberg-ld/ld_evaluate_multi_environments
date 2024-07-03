@@ -1,0 +1,5 @@
+aws_region        = "us-east-2"
+unique_identifier = "coastflageval"
+app_name          = "demo-flag-eval"
+ld_api_key        = "api-XXX"
+owner             = "your-name@launchdarkly.com"
